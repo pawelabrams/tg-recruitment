@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\NotificationPublisher\Domain\Recipient;
 
-class Recipient implements RecipientInterface
+class Recipient implements SmsRecipientInterface
 {
+    use SmsRecipientTrait;
 }
