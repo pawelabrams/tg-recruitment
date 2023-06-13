@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\NotificationPublisher\Infrastructure\Twilio;
+namespace App\NotificationPublisher\Infrastructure\Transport;
 
 use App\NotificationPublisher\Domain\MessageInterface;
 use App\NotificationPublisher\Domain\TransportInterface;
 
-class TwilioTransport implements TransportInterface
+class PushyTransport implements TransportInterface
 {
     public function send(MessageInterface $message): bool
     {
@@ -16,7 +16,7 @@ class TwilioTransport implements TransportInterface
 
     public function supports(MessageInterface $message): bool
     {
-        return in_array('sms', $message->getNotification()->getChannels());
-            // && $message->getRecipient() instanceof SmsRecipientInterface; //TODO
+        return in_array('push', $message->getNotification()->getChannels());
+            // && $message->getRecipient() instanceof PushyRecipientInterface; //TODO
     }
 }

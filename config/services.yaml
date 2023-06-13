@@ -22,3 +22,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\NotificationPublisher\Domain\NotificationPublisher:
+        arguments:
+            -
+                email:
+                    - '@App\NotificationPublisher\Infrastructure\Transport\EmailTransport'
+                push:
+                    - '@App\NotificationPublisher\Infrastructure\Transport\PushyTransport'
+                sms:
+                    - '@App\NotificationPublisher\Infrastructure\Transport\TwilioTransport'
