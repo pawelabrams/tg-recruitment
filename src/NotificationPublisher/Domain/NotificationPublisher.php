@@ -6,6 +6,10 @@ namespace App\NotificationPublisher\Domain;
 
 use App\NotificationPublisher\Domain\Exception\ChannelsNotFoundException;
 use App\NotificationPublisher\Domain\Exception\TransportException;
+use App\NotificationPublisher\Domain\Message\Message;
+use App\NotificationPublisher\Domain\Message\MessageInterface;
+use App\NotificationPublisher\Domain\Recipient\RecipientInterface;
+use App\NotificationPublisher\Domain\Transport\TransportInterface;
 
 class NotificationPublisher implements NotificationPublisherInterface
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\NotificationPublisher\Infrastructure\Transport;
 
-use App\NotificationPublisher\Domain\MessageInterface;
-use App\NotificationPublisher\Domain\TransportInterface;
+use App\NotificationPublisher\Domain\Message\MessageInterface;
+use App\NotificationPublisher\Domain\Transport\TransportInterface;
 
 class PushyTransport implements TransportInterface
 {

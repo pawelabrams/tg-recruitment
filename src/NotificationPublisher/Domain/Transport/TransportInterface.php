@@ -2,9 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\NotificationPublisher\Domain;
+namespace App\NotificationPublisher\Domain\Transport;
 
 use App\NotificationPublisher\Domain\Exception\TransportException;
+use App\NotificationPublisher\Domain\Message\MessageInterface;
 
 interface TransportInterface
 {
