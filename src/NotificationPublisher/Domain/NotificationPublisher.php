@@ -64,7 +64,12 @@ class NotificationPublisher implements NotificationPublisherInterface
                     }
                 }
 
-                $recipientsToBeNotified = array_diff($recipientsToBeNotified, $reached);
+                $recipientsToBeNotified = array_udiff(
+                    $recipientsToBeNotified,
+                    $reached,
+                    static fn (RecipientInterface $firstRecipient, RecipientInterface $secondRecipient): int =>
+                        $firstRecipient === $secondRecipient ? 0 : 1
+                );
             }
         }
     }
