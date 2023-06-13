@@ -6,12 +6,12 @@ namespace App\NotificationPublisher\Domain;
 
 class Notification
 {
-    public string $content = '';
+    private string $content = '';
 
     /**
      * @param list<string> $channels
      */
-    public function __construct(public string $subject, public array $channels)
+    public function __construct(private readonly string $subject, private readonly array $channels)
     {
     }
 
