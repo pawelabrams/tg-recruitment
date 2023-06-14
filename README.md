@@ -43,9 +43,15 @@ more easily.
 
 I didn't implement logic to find users in a repository, there is only a mock one to enable solution presentation.
 
+I didn't implement the CommandBus nor UseCases, so the CommandHandler is called directly in the controller.
+
 I didn't install AWS SDK, instead I used Symfony Mailer which can be configured to send e-mails through SES easily:
 
 https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport
+
+I'd recommend splitting exceptions in transports into recoverable (timeouts, payment required) and irrecoverable
+(bad API keys, illegal characters in from field), so that the endpoint doesn't return 2xx happily when none of the
+transports are working.
 
 ## Running the solution
 
@@ -57,6 +63,8 @@ https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport
     MOCK_USER_EMAIL='user@user.example'
     MOCK_USER_PUSHY_TOKEN='pushy_token_of_device'
     ```
+   You will probably need to change other variables defined in .env file, like `MAILER_DSN`, `TWILIO_SID`,
+   `TWILIO_AUTH_TOKEN` or `PUSHY_SECRET_TOKEN`.
 2. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
 3. Run `docker compose build --pull --no-cache` to build fresh images
 4. Run `docker compose up` (the logs will be displayed in the current shell)
