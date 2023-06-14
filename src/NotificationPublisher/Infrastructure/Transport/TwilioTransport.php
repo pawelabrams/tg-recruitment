@@ -58,11 +58,12 @@ final class TwilioTransport implements TransportInterface
             'To' => $recipient->getPhone(),
             'Body' => $message->getNotification()->getSubject(),
         ];
-
         $response = $this->client->request('POST', $endpoint, [
             'auth_basic' => [$this->accountSid, $this->authToken],
             'body' => $body,
         ]);
+
+        return $response->getStatusCode() < 400;
     }
 
     public function supports(MessageInterface $message): bool
