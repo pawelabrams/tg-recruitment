@@ -39,6 +39,12 @@ and set up the whole structure using nothing but configuration. The documentatio
 Instead, I decided to crudely reimplement Notifier component, so that my programming knowledge can be assessed a bit
 more easily.
 
+### Caveats
+
+I didn't install AWS SDK, instead I used Symfony Mailer which can be configured to send e-mails through SES easily:
+
+https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport
+
 ## Running the solution
 
 1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
