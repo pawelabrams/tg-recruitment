@@ -45,7 +45,7 @@ class PushyTransport implements TransportInterface
             throw new WrongRecipientTypeException();
         }
 
-        if (!$recipient->hasPhone()) {
+        if (!$recipient->hasPushyToken()) {
             throw new RecipientUnreachableException('No phone provided.');
         }
 
@@ -53,7 +53,7 @@ class PushyTransport implements TransportInterface
 
         $endpoint = sprintf('https://%s/push?api_key=%s', $this->getEndpoint(), $this->secretApiKey);
         $body = [
-            'to' => $recipient->getPhone(),
+            'to' => $recipient->getPushyToken(),
             'notification' => [
                 'title' => $notification->getSubject(),
                 'body' => $notification->getContent(),
@@ -68,8 +68,11 @@ class PushyTransport implements TransportInterface
 
     public function supports(MessageInterface $message): bool
     {
+        $recipient = $message->getRecipient();
+
         return in_array('push', $message->getNotification()->getChannels())
-            && $message->getRecipient() instanceof PushyRecipientInterface;
+            && $recipient instanceof PushyRecipientInterface
+            && $recipient->hasPushyToken();
     }
 
     private function getEndpoint(): string
