@@ -49,11 +49,22 @@ https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport
 
 ## Running the solution
 
-1. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
-2. Run `docker compose build --pull --no-cache` to build fresh images
-3. Run `docker compose up` (the logs will be displayed in the current shell)
-4. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
-5. Run `docker compose down --remove-orphans` to stop the Docker containers.
+1. Add the following vars in the .env.local file to enable mocking. If you got this solution by zip-ball, 
+   you probably have author's personal data there, so you can contact me. If you commit it anywhere, I will personally
+   find you and give you a credentials security course.
+    ```bash
+    MOCK_USER_PHONE='+15555555555'
+    MOCK_USER_EMAIL='user@user.example'
+    MOCK_USER_PUSHY_TOKEN='pushy_token_of_device'
+    ```
+2. If not already done, [install Docker Compose](https://docs.docker.com/compose/install/) (v2.10+)
+3. Run `docker compose build --pull --no-cache` to build fresh images
+4. Run `docker compose up` (the logs will be displayed in the current shell)
+5. Open `https://localhost` in your favorite web browser and [accept the auto-generated TLS certificate](https://stackoverflow.com/a/15076602/1352334)
+6. Navigate to `https://localhost/api/docs` to see the NelmioApiDocsBundle-generated Swagger documentation.
+7. Click on `POST /api/notification` endpoint to check how the endpoint contract looks like.
+8. Use any UUID (UserRepository is mocked, so the user selected will be the same) and a non-empty title to send a notification.
+9. Run `docker compose down --remove-orphans` to stop the Docker containers.
 
 ## Documentation of the Symfony Docker template:
 
