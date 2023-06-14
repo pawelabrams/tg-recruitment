@@ -32,3 +32,6 @@ services:
                     - '@App\NotificationPublisher\Infrastructure\Transport\PushyTransport'
                 sms:
                     - '@App\NotificationPublisher\Infrastructure\Transport\TwilioTransport'
+
+    App\User\Domain\UserRepositoryInterface:
+        class: 'App\User\Infrastructure\UserMockRepository'

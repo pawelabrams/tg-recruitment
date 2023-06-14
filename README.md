@@ -41,6 +41,8 @@ more easily.
 
 ### Caveats
 
+I didn't implement logic to find users in a repository, there is only a mock one to enable solution presentation.
+
 I didn't install AWS SDK, instead I used Symfony Mailer which can be configured to send e-mails through SES easily:
 
 https://symfony.com/doc/current/mailer.html#using-a-3rd-party-transport
