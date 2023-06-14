@@ -33,5 +33,23 @@ services:
                 sms:
                     - '@App\NotificationPublisher\Infrastructure\Transport\TwilioTransport'
 
+    App\NotificationPublisher\Infrastructure\Transport\EmailTransport:
+        arguments:
+            $from: '%env(EMAIL_FROM)%'
+
+    App\NotificationPublisher\Infrastructure\Transport\PushyTransport:
+        arguments:
+            $secretApiKey: '%env(PUSHY_SECRET_KEY)%'
+
+    App\NotificationPublisher\Infrastructure\Transport\TwilioTransport:
+        arguments:
+            $accountSid: '%env(TWILIO_SID)%'
+            $authToken: '%env(TWILIO_AUTH_TOKEN)%'
+            $from: '%env(TWILIO_FROM)%'
+
+    App\NotificationPublisher\UserInterface\Api\:
+        resource: '../src/NotificationPublisher/UserInterface/Api/'
+        tags: [ 'controller.service_arguments' ]
+
     App\User\Domain\UserRepositoryInterface:
         class: 'App\User\Infrastructure\UserMockRepository'
