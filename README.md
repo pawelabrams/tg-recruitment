@@ -39,6 +39,24 @@ and set up the whole structure using nothing but configuration. The documentatio
 Instead, I decided to crudely reimplement Notifier component, so that my programming knowledge can be assessed a bit
 more easily.
 
+### What is lacking
+
+First of all, I didn't implement points 2b, 4 or 5; here is how I would implement them in the current structure:
+
+2b. Resending messages when transports aren't ready: I would add `DeadletterTransport` which would `support` all channels.
+    Deadletters would be added to a queue with exponential back-off. After a configurable number of retries, their failure
+    would be logged and the number of deadletters + ratio dead/normal deliveries would be counted in a monitor (eg. in Datadog).
+4.  Throttling can be done in analogous way, with a decorator `Transport` wrapping the normal transports.
+    It would fail in a normal recoverable way if the threshold was topped.
+5.  Usage tracking would be trivial in Symfony Notifier case, as the component dispatched events when delivering notifications.
+    I would follow the same way, injecting EventDispatcher into the NotificationPublisher.
+    Infrastructure-layer class called `UserRecipient` could be the place to add GDPR-compliant tracking ID.
+    Alternatively, we could just insert the tracking code into SendNotificationCommandHandler instead of relying on events.
+
+There are also no integration tests. I've planned to create a test to check if issuing a SendNotification command
+would lead to transports being sent a Message, but without CommandBus it's not much more than the existing unit test
+of the CommandHandler.
+
 ### Caveats
 
 I didn't implement logic to find users in a repository, there is only a mock one to enable solution presentation.
